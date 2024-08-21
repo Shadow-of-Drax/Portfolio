@@ -1,0 +1,120 @@
+body {
+  margin: 0;
+  text-align: center;
+  color: #34B3F1;
+  font-family: 'El Messiri', serif;
+}
+
+h1 {
+  font-size: 5.625rem;
+  margin: 50px auto 0 auto;
+  font-family: 'Splash', cursive;
+  color: #0080ff;
+  line-height: 1;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: 'El Messiri', serif;
+  font-size: 2.5rem;
+  color: #0080ff;
+  font-weight: normal;
+}
+
+h3 {
+  margin-top: 0;
+  font-family: 'El Messiri', serif;
+  color: #11999E;
+}
+
+.top-container {
+  background-color: #CDBE78;
+  position: relative;
+  padding-top: 100px;
+}
+
+.grass-field {
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.middle-container {
+  background-color: #2C3639;
+}
+
+.bottom-container {
+  background-color: #2C3639;
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+
+.pro {
+  text-decoration: underline;
+}
+
+.top-cloud {
+  position: absolute;
+  right: 300px;
+  top: 50px;
+}
+
+.bottom-cloud {
+  position: absolute;
+  left: 300px;
+  bottom: 300px;
+}
+
+.btn {
+  color: #11999E;
+}
+
+.fist-row {
+  width: 50%;
+  margin: 100px auto 100px auto;
+  text-align: left;
+  line-height: 2;
+}
+
+.computer-row {
+  width: 50%;
+  margin: 100px auto 100px auto;
+  text-align: right;
+  line-height: 2;
+}
+
+.skill-fist {
+  width: 25%;
+  float: left;
+  margin-right: 30px;
+}
+
+.skill-Computer {
+  width: 25%;
+  float: right;
+  margin-left: 30px;
+}
+
+.btn {
+  background: #11cdd4;
+  background-image: linear-gradient(top, #11cdd4, #11999e);
+  background-image: linear-gradient(to bottom, #11cdd4, #11999e);
+  border-radius: 8px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #30e3cb;
+  background-image: linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: linear-gradient(to bottom, #30e3cb, #2bc4ad);
+  text-decoration: none;
+}
+
+.footer-link {
+  color: #EB5353;
+}
