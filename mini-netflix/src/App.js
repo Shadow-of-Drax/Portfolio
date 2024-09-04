@@ -2,6 +2,8 @@ import React from 'react';
 import Navbar from './components';
 import Banner from './components';
 import Row from './components';
+
+
 function App() {
   return (
     <div className="app">
