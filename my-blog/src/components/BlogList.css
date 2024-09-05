@@ -1,0 +1,28 @@
+.blog-list {
+    margin: 20px;
+  }
+  
+  .blog-preview {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: left;
+  }
+  
+  .blog-preview h2 {
+    color: #333;
+  }
+  
+  .blog-preview p {
+    color: #555;
+  }
+  
+  .blog-preview a {
+    text-decoration: none;
+  }
+  
+  .blog-preview a:hover {
+    text-decoration: underline;
+  }
