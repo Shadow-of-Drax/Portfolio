@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BlogList from '../components/BlogList';
-import CreatePost from '../pages/CreatePost';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
 
-  const addPost = (newPost) => {
-    setPosts([...posts, newPost]);
-  };
+  useEffect(() => {
+    // Simulating an async fetch operation
+    setTimeout(() => {
+      setPosts([
+        { id: 1, title: 'My First Blog', author: 'John Doe', body: 'This is my first blog post...' },
+        { id: 2, title: 'React Rocks!', author: 'Jane Doe', body: 'React is a powerful library for building UIs...' }
+      ]);
+    }, 1000); // Mock delay to simulate fetching data
+  }, []);
 
   return (
     <div className="home">
       <h2>All Posts</h2>
       <BlogList posts={posts} />
-      <CreatePost addPost={addPost} />
     </div>
   );
 };
