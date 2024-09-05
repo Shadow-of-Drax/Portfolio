@@ -1,23 +1,50 @@
-.blog-preview {
+/* BlogList.css */
+.blog-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+  }
+  
+  .blog-card {
     background-color: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
     border-radius: 8px;
-    text-align: left;
-    position: relative;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s;
   }
   
-  button {
-    margin-right: 10px;
-    padding: 5px 10px;
-    background-color: #f4f4f4;
-    border: 1px solid #ccc;
+  .blog-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .blog-card h2 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .blog-card p {
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .blog-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .blog-actions a, .blog-actions button {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  .blog-actions button {
+    background: none;
+    border: none;
     cursor: pointer;
-    position: absolute;
-    right: 10px;
   }
   
-  button:hover {
-    background-color: #ddd;
+  .blog-actions button:hover {
+    color: #ff3333;
   }
