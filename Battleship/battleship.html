@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Battleship Game</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    td {
+      width: 30px;
+      height: 30px;
+      border: 1px solid black;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .hit {
+      background-color: red;
+    }
+    .miss {
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Battleship Game</h1>
+  <table id="board"></table>
+  <p id="message"></p>
+
+  <script>
+    const boardSize = 10;
+    const numShips = 5;
+    const shipLength = 3;
+    const board = [];
+    let ships = [];
+
+    // Initialize the board
+    for (let i = 0; i < boardSize; i++) {
+      board[i] = [];
+      for (let j = 0; j < boardSize; j++) {
+        board[i][j] = '';
+      }
+    }
+
+    // Generate random ship positions
+    function generateShips() {
+      ships = [];
+      for (let i = 0; i < numShips; i++) {
+        let ship;
+        do {
+          ship = createShip();
+        } while (collision(ship));
+        ships.push(ship);
+      }
+    }
+
+    function createShip() {
+      const direction = Math.random() < 0.5;
+      const row = direction ? Math.floor(Math.random() * boardSize) : Math.floor(Math.random() * (boardSize - shipLength));
+      const col = direction ? Math.floor(Math.random() * (boardSize - shipLength)) : Math.floor(Math.random() * boardSize);
+      const newShip = [];
+
+      for (let i = 0; i < shipLength; i++) {
+        newShip.push([row + (direction ? 0 : i), col + (direction ? i : 0)]);
+      }
+      return newShip;
+    }
+
+    function collision(ship) {
+      for (const otherShip of ships) {
+        for (const segment of ship) {
+          for (const otherSegment of otherShip) {
+            if (segment[0] === otherSegment[0] && segment[1] === otherSegment[1]) {
+              return true;
+            }
+          }
+        }
+      }
+      return false;
+    }
+
+    // Create the game board UI
+    function createBoard() {
+      const table = document.getElementById('board');
+      for (let i = 0; i < boardSize; i++) {
+        const row = document.createElement('tr');
+        for (let j = 0; j < boardSize; j++) {
+          const cell = document.createElement('td');
+          cell.addEventListener('click', () => handleShot(i, j));
+          row.appendChild(cell);
+        }
+        table.appendChild(row);
+      }
+    }
+
+    // Handle player's shot
+    function handleShot(row, col) {
+      if (board[row][col] === '') {
+        let hit = false;
+        for (const ship of ships) {
+          for (const segment of ship) {
+            if (segment[0] === row && segment[1] === col) {
+              hit = true;
+              break;
+            }
+          }
+          if (hit) break;
+        }
+        board[row][col] = hit ? 'hit' : 'miss';
+        updateBoard();
+        checkGameOver();
+      }
+    }
+
+    // Update the game board UI
+    function updateBoard() {
+      const table = document.getElementById('board');
+      for (let i = 0; i < boardSize; i++) {
+        for (let j = 0; j < boardSize; j++) {
+          const cell = table.rows[i].cells[j];
+          cell.className = board[i][j];
+        }
+      }
+    }
+
+    // Check if the game is over
+    function checkGameOver() {
+      let hits = 0;
+      for (const ship of ships) {
+        for (const segment of ship) {
+          if (board[segment[0]][segment[1]] === 'hit') {
+            hits++;
+          }
+        }
+      }
+      if (hits === numShips * shipLength) {
+        document.getElementById('message').textContent = 'You sank all the ships!';
+      }
+    }
+
+    // Initialize the game
+    generateShips();
+    createBoard();
+  </script>
+</body>
+</html>
