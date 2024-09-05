@@ -11,12 +11,12 @@ const CreatePost = ({ addPost }) => {
     e.preventDefault();
     if (title && author && body) {
       const newPost = {
-        id: Date.now(), // Temporary ID
+        id: Date.now(),
         title,
         author,
         body,
       };
-      addPost(newPost); // Use addPost function
+      addPost(newPost);
       setTitle('');
       setAuthor('');
       setBody('');
