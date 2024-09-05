@@ -1,0 +1,18 @@
+/* Post.css */
+.post-details {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .post-details h1 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .post-details p {
+    color: #666;
+    margin-bottom: 20px;
+  }
