@@ -7,8 +7,8 @@ const Home = () => {
   useEffect(() => {
     // Mock fetch API
     setPosts([
-      { id: 1, title: 'My First Blog', author: 'John Doe', body: 'This is my first blog post...' },
-      { id: 2, title: 'React Rocks!', author: 'Jane Doe', body: 'React is a powerful library for building UIs...' }
+      { id: 1, title: 'My First Blog', author: 'James Warren', body: 'This is my first blog post...' },
+      { id: 2, title: 'From the beginning', author: 'Jane Doe', body: 'Started my careere in the Army...' }
     ]);
   }, []);
 
