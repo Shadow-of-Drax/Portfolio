@@ -1,28 +1,23 @@
-.blog-list {
-    margin: 20px;
-  }
-  
-  .blog-preview {
+.blog-preview {
     background-color: white;
     padding: 20px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     text-align: left;
+    position: relative;
   }
   
-  .blog-preview h2 {
-    color: #333;
+  button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
   }
   
-  .blog-preview p {
-    color: #555;
-  }
-  
-  .blog-preview a {
-    text-decoration: none;
-  }
-  
-  .blog-preview a:hover {
-    text-decoration: underline;
+  button:hover {
+    background-color: #ddd;
   }
