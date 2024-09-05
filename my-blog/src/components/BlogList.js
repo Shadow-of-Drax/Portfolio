@@ -1,17 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const BlogList = ({ posts, handleDelete, handleEdit }) => {
+const BlogList = ({ posts, deletePost }) => {
   return (
     <div className="blog-list">
-      {posts.map(post => (
+      {posts.map((post) => (
         <div className="blog-preview" key={post.id}>
           <Link to={`/post/${post.id}`}>
             <h2>{post.title}</h2>
             <p>Written by {post.author}</p>
           </Link>
-          <button onClick={() => handleEdit(post)}>Edit</button>
-          <button onClick={() => handleDelete(post.id)}>Delete</button>
+          <Link to={`/edit/${post.id}`}>
+            <button>Edit</button>
+          </Link>
+          <button onClick={() => deletePost(post.id)}>Delete</button>
         </div>
       ))}
     </div>
