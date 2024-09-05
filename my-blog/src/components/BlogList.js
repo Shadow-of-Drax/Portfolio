@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './BlogList.css';
 
-const BlogList = ({ posts }) => {
+const BlogList = ({ posts, handleDelete, handleEdit }) => {
   return (
     <div className="blog-list">
       {posts.map(post => (
@@ -11,10 +10,12 @@ const BlogList = ({ posts }) => {
             <h2>{post.title}</h2>
             <p>Written by {post.author}</p>
           </Link>
+          <button onClick={() => handleEdit(post)}>Edit</button>
+          <button onClick={() => handleDelete(post.id)}>Delete</button>
         </div>
       ))}
     </div>
   );
-}
+};
 
 export default BlogList;
