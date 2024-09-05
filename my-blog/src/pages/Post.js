@@ -4,7 +4,9 @@ import './Post.css';
 
 const Post = ({ posts }) => {
   const { id } = useParams();
-  const post = posts.find((post) => post.id === parseInt(id));
+
+  // Ensure posts is not undefined before calling .find()
+  const post = posts && posts.find((post) => post.id === parseInt(id));
 
   return (
     <div className="post-details container">
@@ -15,7 +17,7 @@ const Post = ({ posts }) => {
           <p>{post.body}</p>
         </>
       ) : (
-        <p>Post not found.</p>
+        <p>Post not found or loading...</p>
       )}
     </div>
   );
