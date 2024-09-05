@@ -9,39 +9,44 @@ const CreatePost = ({ addPost }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newPost = {
-      id: Date.now(),
-      title,
-      author,
-      body
-    };
-    addPost(newPost);
-    navigate('/');
+    if (title && author && body) {
+      const newPost = {
+        id: Date.now(), // Temporary ID
+        title,
+        author,
+        body,
+      };
+      addPost(newPost); // Use addPost function
+      setTitle('');
+      setAuthor('');
+      setBody('');
+      navigate('/');
+    }
   };
 
   return (
-    <div className="create">
-      <h2>Create a New Blog Post</h2>
+    <div className="create-post">
+      <h2>Create a New Post</h2>
       <form onSubmit={handleSubmit}>
         <label>Title:</label>
         <input
           type="text"
-          required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
         <label>Author:</label>
         <input
           type="text"
-          required
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
+          required
         />
         <label>Content:</label>
         <textarea
-          required
           value={body}
           onChange={(e) => setBody(e.target.value)}
+          required
         ></textarea>
         <button type="submit">Add Post</button>
       </form>
