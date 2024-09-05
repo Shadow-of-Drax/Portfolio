@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles.css';
+import './banner.css';
 
 function Banner() {
   const backgroundImage = 'https://image.tmdb.org/t/p/original/your-image-path.jpg'; // Replace with an actual image URL
