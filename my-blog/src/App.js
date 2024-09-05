@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Post from './pages/Post';
-import './styles.css';
+import CreatePost from './pages/CreatePost';
+import EditPost from './pages/EditPost';
 
 function App() {
   return (
@@ -13,6 +14,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/post/:id" element={<Post />} />
+          <Route path="/create" element={<CreatePost />} />
+          <Route path="/edit/:id" element={<EditPost />} />
         </Routes>
       </div>
     </Router>
