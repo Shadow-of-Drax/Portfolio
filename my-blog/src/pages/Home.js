@@ -8,7 +8,7 @@ const Home = () => {
     // Mock fetch API
     setPosts([
       { id: 1, title: 'My First Blog', author: 'James Warren', body: 'This is my first blog post...' },
-      { id: 2, title: 'From the beginning', author: 'Jane Doe', body: 'Started my careere in the Army...' }
+      { id: 2, title: 'From the beginning', author: 'James Warren', body: 'Started my careere in the Army...' }
     ]);
   }, []);
 
