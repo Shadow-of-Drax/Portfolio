@@ -9,8 +9,8 @@ const Post = () => {
   useEffect(() => {
     // Mock fetch API
     const fetchedPosts = [
-      { id: 1, title: 'My First Blog', author: 'John Doe', body: 'This is my first blog post...' },
-      { id: 2, title: 'React Rocks!', author: 'Jane Doe', body: 'React is a powerful library for building UIs...' }
+      { id: 1, title: 'My First Blog', author: 'James Warren', body: 'This is my first blog post...' },
+      { id: 2, title: 'From the eginning', author: 'James Warren', body: 'Started my careere in the Army in Febuary of 2003. Knowing exactyly what I was getting into since 9/11 was so recent. I enlisted into the Field Artillery as a Forward Observer. My first set of duties were as a driver of our vehical. I would learn the basics of my job and learn how to maintain and drive the vehical.' }
     ];
 
     const fetchedPost = fetchedPosts.find(p => p.id === parseInt(id));
