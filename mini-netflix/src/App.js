@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components';
 import Banner from './components';
 import Row from './components';
+import './styles.css';
 
 
 function App() {
