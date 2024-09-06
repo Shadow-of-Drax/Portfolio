@@ -20,7 +20,7 @@ function Navbar() {
       <div className="navbar">
         <img
           className="navbar__logo"
-          src="/assets/ninja.png"
+          src img="./assets/ninja.png"
           alt="Ninja Logo"
         />
         <img
