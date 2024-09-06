@@ -19,8 +19,8 @@ function Navbar() {
       <div className="navbar">
         <img
           className="navbar__logo"
-          src="/assets/logo.png"
-          alt="Netflix Logo"
+          src="/assets/ninja.png"
+          alt="Ninja Logo"
         />
         <img
           className="navbar__avatar"
