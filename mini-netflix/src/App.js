@@ -11,8 +11,8 @@ function App() {
       <Banner />
       <Row title="Trending Now" />
       <Row title="Top Rated" />
-      <Row title="Action Movies" />
-      <Row title="Comedy Movies" />
+      <Row title="80's" />
+      <Row title="90's" />
     </div>
   );
 }
