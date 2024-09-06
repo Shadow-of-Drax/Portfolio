@@ -1,5 +1,5 @@
 import React from 'react';
-import MovieCard from './movieCard';
+import MovieCard from '../movieCard/movieCard.js';
 import './row.css';
 
 function Row({ title }) {
