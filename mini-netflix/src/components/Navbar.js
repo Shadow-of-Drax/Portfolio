@@ -1,5 +1,6 @@
 import React from 'react';
 import './navbar.css';
+import './assets/ninja.png';
 
 function Navbar() {
   return (
