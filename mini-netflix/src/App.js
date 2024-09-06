@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from './components/navbar.js';
-import Banner from './components/banner.js';
-import Row from './components/Row.js';
+import Navbar from './components/navbar/navbar.js';
+import Banner from './components/banner/banner.js';
+import Row from './components/row/Row.js';
 import './styles.css';
 
 function App() {
