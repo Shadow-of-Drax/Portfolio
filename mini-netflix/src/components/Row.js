@@ -2,7 +2,7 @@ import React from 'react';
 import MovieCard from './movieCard';
 import './row.css';
 
-function row({ title }) {
+function Row({ title }) {
     const movies = [
         { id: 1, title: "Movie 1", imageUrl: "https://image.tmdb.org/t/p/original/movie-image1.jpg" },
         { id: 2, title: "Movie 2", imageUrl: "https://image.tmdb.org/t/p/original/movie-image2.jpg" },
@@ -21,9 +21,10 @@ function row({ title }) {
     </div>
   );
 
+  // Remove the invalid code snippet
   function newFunction() {
-    { 3, name; "Movie 3", imageUrl; "https://image.tmdb.org/t/p/original/movie-image3.jpg"; };
+      // Code goes here...
   }
 }
 
-export default row;
+export default Row;
