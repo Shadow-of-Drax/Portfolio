@@ -1,6 +1,7 @@
 import React from 'react';
 import './navbar.css';
 import ninja from '../assets/ninja.png';
+import smiley from '../assets/smiley.jpg';
 
 function Navbar() {
   return (
@@ -13,7 +14,7 @@ function Navbar() {
         />
         <img
           className="navbar__avatar"
-          src="https://image.shutterstock.com/image-vector/avatar-vector-male-profile-gray-260nw-149083895.jpg"
+          src={smiley}
           alt="User Avatar"
         />
       </div>
@@ -25,7 +26,7 @@ function Navbar() {
         />
         <img
           className="navbar__avatar"
-          src="/components/assets/smiley.jpg"
+          src={smiley}
           alt="User Avatar"
         />
       </div>
@@ -37,7 +38,7 @@ function Navbar() {
         />
         <img
           className="navbar__avatar"
-          src="https://image.shutterstock.com/image-vector/avatar-vector-male-profile-gray-260nw-149083895.jpg"
+          src={smiley}
           alt="User Avatar"
         />
       </div>
