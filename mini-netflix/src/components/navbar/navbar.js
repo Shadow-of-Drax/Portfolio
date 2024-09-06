@@ -1,6 +1,6 @@
 import React from 'react';
 import './navbar.css';
-import '../assets/ninja.png';
+import ninja from '../assets/ninja.png';
 
 function Navbar() {
   return (
@@ -8,7 +8,7 @@ function Navbar() {
       <div className="navbar">
         <img
           className="navbar__logo"
-          src="/assets/ninja.png"
+          src={ninja}
           alt="Ninja Logo"
         />
         <img
@@ -20,7 +20,7 @@ function Navbar() {
       <div className="navbar">
         <img
           className="navbar__logo"
-          src="./assets/ninja.png"
+          src={ninja}
           alt="Ninja Logo"
         />
         <img
@@ -32,7 +32,7 @@ function Navbar() {
       <div className="navbar">
         <img
           className="navbar__logo"
-          src="/assets/ninja.png"
+          src={ninja}
           alt="Ninja Logo"
         />
         <img
