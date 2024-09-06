@@ -21,10 +21,6 @@ function Row({ title }) {
     </div>
   );
 
-  // Remove the invalid code snippet
-  function newFunction() {
-      // Code goes here...
-  }
 }
 
 export default Row;
