@@ -4,7 +4,7 @@ import "./footer.css";
 function Footer() {
   return (
     <footer className="footer">
-      <p>© 2021 Netflix Clone</p>
+      <p>Created by: James Warren © 2024</p>
     </footer>
   );
 }
