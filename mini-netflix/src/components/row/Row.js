@@ -1,7 +1,7 @@
 import React from 'react';
 import MovieCard from '../movieCard/movieCard.js';
 import './row.css';
-import tmnt from '../assets/tmnt.jpg';
+
 
 function Row({ title }) {
     const movies = [
