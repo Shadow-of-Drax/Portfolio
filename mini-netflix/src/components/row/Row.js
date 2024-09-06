@@ -20,7 +20,6 @@ function Row({ title }) {
       </div>
     </div>
   );
-
 }
 
 export default Row;
