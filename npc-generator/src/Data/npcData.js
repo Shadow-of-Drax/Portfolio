@@ -84,3 +84,20 @@ export const flaws = [
   "I’m prone to greed.",
   "I run from my past.",
 ];
+
+export const skills = [
+  "Athletics",
+  "Acrobatics",
+  "Arcana",
+  "History",
+  "Deception",
+  "Insight",
+  "Investigation",
+  "Medicine",
+  "Nature",
+  "Perception",
+  "Performance",
+  "Persuasion",
+  "Religion",
+  "Stealth",
+];
