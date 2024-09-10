@@ -48,3 +48,39 @@ export const backgrounds = [
   "Hermit",
   "Outlander",
 ];
+
+export const personalityTraits = [
+  "I love adventure.",
+  "I never back down from a fight.",
+  "I value knowledge above all.",
+  "I am extremely cautious.",
+  "I trust everyone too easily.",
+  "I have a quick temper.",
+];
+
+export const ideals = [
+  "Honor",
+  "Glory",
+  "Power",
+  "Knowledge",
+  "Freedom",
+  "Compassion",
+];
+
+export const bonds = [
+  "I have a family to protect.",
+  "I owe a great debt to someone.",
+  "My homeland is my life.",
+  "I fight for justice.",
+  "My sword is my honor.",
+  "I live to protect the innocent.",
+];
+
+export const flaws = [
+  "I am quick to anger.",
+  "I trust no one.",
+  "I’m overly confident.",
+  "I’m afraid of failure.",
+  "I’m prone to greed.",
+  "I run from my past.",
+];
