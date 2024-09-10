@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import NPCGenerator from "./components/NPCGenerator";
+import NPCGenerator from "./Components/npcGenerator";
 
 function App() {
   return (
