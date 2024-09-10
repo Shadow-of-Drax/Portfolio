@@ -131,3 +131,10 @@ export const armor = [
   "Cloth Robes",
   "Shield",
 ];
+
+export const appearanceTraits = {
+  eyeColors: ["blue", "green", "brown", "hazel", "black"],
+  hairColors: ["blonde", "black", "brown", "red", "white"],
+  heights: ["short", "average", "tall"],
+  bodyTypes: ["slim", "muscular", "stocky"],
+};
