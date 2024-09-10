@@ -101,3 +101,23 @@ export const skills = [
   "Religion",
   "Stealth",
 ];
+
+export const weapons = [
+  "Shortsword",
+  "Longsword",
+  "Dagger",
+  "Greatsword",
+  "Battleaxe",
+  "Bow",
+  "Crossbow",
+  "Mace",
+  "Staff",
+];
+
+export const armor = [
+  "Leather Armor",
+  "Chain Mail",
+  "Plate Armor",
+  "Cloth Robes",
+  "Shield",
+];
