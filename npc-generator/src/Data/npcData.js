@@ -47,6 +47,16 @@ export const backgrounds = [
   "Guild Artisan",
   "Hermit",
   "Outlander",
+  {
+    name: "Noble",
+    features:
+      "Position of Privilege: You are treated with respect in high society.",
+  },
+  {
+    name: "Soldier",
+    features:
+      "Military Rank: You have military contacts and are recognized by rank.",
+  },
 ];
 
 export const personalityTraits = [
