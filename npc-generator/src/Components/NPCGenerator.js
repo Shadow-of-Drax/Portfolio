@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import jsPDF from "jspdf";
 import {
   races,
   classes,
@@ -13,11 +14,8 @@ import {
   armor,
 } from "../data/npcData";
 
-const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
 const NPCGenerator = () => {
   const [npc, setNpc] = useState(null);
-  const [savedNpcs, setSavedNpcs] = useState(loadNPCs());
 
   const generateNPC = () => {
     const newNpc = {
@@ -32,7 +30,7 @@ const NPCGenerator = () => {
       skill: getRandomItem(skills),
       weapon: getRandomItem(weapons),
       armor: getRandomItem(armor),
-      strength: Math.floor(Math.random() * 16) + 3, // Random ability scores between 3 and 18
+      strength: Math.floor(Math.random() * 16) + 3,
       dexterity: Math.floor(Math.random() * 16) + 3,
       constitution: Math.floor(Math.random() * 16) + 3,
       intelligence: Math.floor(Math.random() * 16) + 3,
@@ -44,9 +42,38 @@ const NPCGenerator = () => {
     setNpc(newNpc);
   };
 
-  const saveNpcHandler = () => {
-    saveNPC(npc);
-    setSavedNpcs(loadNPCs());
+  const exportToPDF = () => {
+    if (!npc) return;
+
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text("D&D 5e NPC Character Sheet", 10, 10);
+
+    doc.setFontSize(12);
+    doc.text(`Race: ${npc.race}`, 10, 30);
+    doc.text(`Class: ${npc.class}`, 10, 40);
+    doc.text(`Alignment: ${npc.alignment}`, 10, 50);
+    doc.text(`Background: ${npc.background}`, 10, 60);
+    doc.text(`Personality Trait: ${npc.personalityTrait}`, 10, 70);
+    doc.text(`Ideal: ${npc.ideal}`, 10, 80);
+    doc.text(`Bond: ${npc.bond}`, 10, 90);
+    doc.text(`Flaw: ${npc.flaw}`, 10, 100);
+    doc.text(`Skill Proficiency: ${npc.skill}`, 10, 110);
+    doc.text(`Weapon: ${npc.weapon}`, 10, 120);
+    doc.text(`Armor: ${npc.armor}`, 10, 130);
+
+    doc.text("Ability Scores:", 10, 140);
+    doc.text(`Strength: ${npc.strength}`, 10, 150);
+    doc.text(`Dexterity: ${npc.dexterity}`, 10, 160);
+    doc.text(`Constitution: ${npc.constitution}`, 10, 170);
+    doc.text(`Intelligence: ${npc.intelligence}`, 10, 180);
+    doc.text(`Wisdom: ${npc.wisdom}`, 10, 190);
+    doc.text(`Charisma: ${npc.charisma}`, 10, 200);
+
+    doc.text(`HP: ${npc.hp}`, 10, 210);
+    doc.text(`AC: ${npc.ac}`, 10, 220);
+
+    doc.save("npc-character-sheet.pdf");
   };
 
   return (
@@ -95,30 +122,34 @@ const NPCGenerator = () => {
             <li>HP: {npc.hp}</li>
             <li>AC: {npc.ac}</li>
           </ul>
-          <button onClick={saveNpcHandler}>Save NPC</button>
+          <button onClick={exportToPDF}>Export to PDF</button>
         </div>
       )}
-
-      <h2>Saved NPCs</h2>
-      <div>
-        {savedNpcs.length > 0 ? (
-          savedNpcs.map((savedNpc, index) => (
-            <div key={index}>
-              <h3>NPC #{index + 1}</h3>
-              <p>Race: {savedNpc.race}</p>
-              <p>Class: {savedNpc.class}</p>
-            </div>
-          ))
-        ) : (
-          <p>No saved NPCs</p>
-        )}
-      </div>
     </div>
   );
 };
 
-const loadNPCs = () => {
-  return JSON.parse(localStorage.getItem("savedNPCs")) || [];
+const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+const generateHitPoints = (npcClass) => {
+  const hitDice = {
+    Fighter: 10,
+    Wizard: 6,
+    Rogue: 8,
+    Cleric: 8,
+    Barbarian: 12,
+    Paladin: 10,
+    Druid: 8,
+    Ranger: 10,
+    Sorcerer: 6,
+    Warlock: 8,
+  };
+  return hitDice[npcClass] + Math.floor(Math.random() * 6 + 1); // Random modifier
+};
+
+const generateArmorClass = (dexterity) => {
+  const baseAC = 10;
+  return baseAC + Math.floor((dexterity - 10) / 2); // Dexterity modifier
 };
 
 export default NPCGenerator;
