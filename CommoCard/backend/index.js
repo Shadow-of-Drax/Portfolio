@@ -30,15 +30,19 @@ const io = socketIo(server, {
 
 // Real-time socket communication
 io.on("connection", (socket) => {
-  console.log("User connected:", socket.id);
+  console.log(`User connected: ${socket.id}`);
 
-  socket.on("message", (data) => {
-    // Broadcast encrypted message to all users
-    io.emit("message", data);
+  socket.on("joinRoom", (room) => {
+    socket.join(room);
+    console.log(`User ${socket.id} joined room ${room}`);
+  });
+
+  socket.on("message", (message) => {
+    io.to(message.room).emit("message", message.text);
   });
 
   socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
+    console.log(`User disconnected: ${socket.id}`);
   });
 });
 
