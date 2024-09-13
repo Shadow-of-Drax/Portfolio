@@ -31,6 +31,19 @@ export const updatePost = async (req: Request, res: Response) => {
   }
 };
 
+export const deletePost = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const deletedPost = await Post.findByIdAndDelete(id);
+        if (!deletedPost) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+        res.status(200).json({ message: 'Post deleted' });
+    } catch (error) {
+        res.status(400).json({ message: 'Error deleting post', error });
+    }
+};
+
 export const addComment = async (req: Request, res: Response) => {
     try {
       const { content } = req.body;
@@ -172,7 +185,7 @@ export const addComment = async (req: Request, res: Response) => {
               throw new Error('Function not implemented.');
           },
           schema: new mongoose.Schema({ content: String, author: mongoose.Types.ObjectId, date: Date }),
-          set: function <T extends string | number | symbol>(path: T, val: any, type: any, options?: mongoose.DocumentSetOptions): IComment {
+          set: function (path: string | Record<string, any>, val: any, type?: any, options?: mongoose.DocumentSetOptions): IComment {
               throw new Error('Function not implemented.');
           },
           set: function (path: string | Record<string, any>, val: any, type: any, options?: mongoose.DocumentSetOptions): IComment {

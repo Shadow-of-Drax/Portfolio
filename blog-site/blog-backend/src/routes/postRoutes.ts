@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createPost, getPosts, updatePost, addComment } from '../controllers/postController';
+import { createPost, getPosts, updatePost, deletePost, addComment } from '../controllers/postController';
 import { verifyToken } from '../controllers/authController';
 
 const router = Router();
