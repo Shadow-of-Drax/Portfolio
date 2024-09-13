@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import Post, { IComment } from '../models/Post';
-import mongoose, { Connection } from 'mongoose';
+import mongoose, { Connection, set } from 'mongoose';
 
 export const createPost = async (req: Request, res: Response) => {
   try {
@@ -9,10 +9,10 @@ export const createPost = async (req: Request, res: Response) => {
     const newPost = new Post({ title, content, author });
     const savedPost = await newPost.save();
     res.status(201).json(savedPost);
-  } catch (error) {
+} catch (error: any) {
     res.status(400).json({ message: 'Error creating post', error });
   }
-};
+  }
 
 // Add updatePost function
 export const updatePost = async (req: Request, res: Response) => {
@@ -95,7 +95,7 @@ export const addComment = async (req: Request, res: Response) => {
           $session: function (session?: mongoose.ClientSession | null): mongoose.ClientSession | null {
               throw new Error('Function not implemented.');
           },
-          $set: function (path: string | Record<string, any>, val: any, typeOrOptions?: any, options?: mongoose.DocumentSetOptions): IComment {
+          $set: function (path: string | Record<string, any>, val: any, type?: any, options?: mongoose.DocumentSetOptions): IComment {
               throw new Error('Function not implemented.');
           },
           $where: {},
@@ -181,26 +181,33 @@ export const addComment = async (req: Request, res: Response) => {
           set: function (path: string | Record<string, any>, val: any, options?: mongoose.DocumentSetOptions): IComment {
               throw new Error('Function not implemented.');
           },
-              throw new Error('Function not implemented.');
-          },
+              },
+              set: function (path: string | Record<string, any>, val: any, type: any, options?: mongoose.DocumentSetOptions): IComment {
+                  throw new Error('Function not implemented.');
+              },
+              set: function (path: string | Record<string, any>, val: any, options?: mongoose.DocumentSetOptions): IComment {
+                  throw new Error('Function not implemented.');
+              },
+              set: function (path: string | Record<string, any>, val: any, type: any, options?: mongoose.DocumentSetOptions): IComment {
+                  throw new Error('Function not implemented.');
+              },
+              set: function (path: string | Record<string, any>, val: any, options?: mongoose.DocumentSetOptions): IComment {
+                  throw new Error('Function not implemented.');
+              },
           toJSON: function (options?: mongoose.ToObjectOptions & { flattenMaps?: boolean; }): mongoose.FlattenMaps<any> {
               throw new Error('Function not implemented.');
           },
           toObject: function (options?: mongoose.ToObjectOptions) {
               throw new Error('Function not implemented.');
           },
-          unmarkModified: function <T extends string | number | symbol>(path: T): void {
+          unmarkModified: function (path: string | number | symbol): void {
               throw new Error('Function not implemented.');
           },
           updateOne: function (update?: mongoose.UpdateWithAggregationPipeline | mongoose.UpdateQuery<IComment> | undefined, options?: mongoose.QueryOptions | null): mongoose.Query<any, IComment, {}, unknown, 'find', Record<string, never>> {
               throw new Error('Function not implemented.');
           },
-          validate: function <T extends string | number | symbol>(pathsToValidate?: T | T[] | undefined, options?: mongoose.AnyObject): Promise<void> {
-              throw new Error('Function not implemented.');
-          },
-          validateSync: function <T extends string | number | symbol>(pathsToValidate?: T | T[] | undefined, options?: mongoose.AnyObject): mongoose.Error.ValidationError | null {
-              throw new Error('Function not implemented.');
-          }
+          // Removed unnecessary validate function
+
       });
       await post.save();
   
