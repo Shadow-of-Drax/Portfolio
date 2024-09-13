@@ -146,6 +146,7 @@ const handleAddComment = async (e: React.FormEvent, postId: string) => {
         </div>
       ))}
     </div>
+    <div dangerouslySetInnerHTML={{ __html: post.content }} />
   );
 };
 
