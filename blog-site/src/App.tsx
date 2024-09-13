@@ -1,15 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import CreatePostPage from './pages/CreatePostPage';
 
 const App: React.FC = () => {
     return (
         <Router>
-            <Switch>
-                <Route path="/" exact component={HomePage} />
-                <Route path="/create" component={CreatePostPage} />
-            </Switch>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/create" element={<CreatePostPage />} />
+            </Routes>
         </Router>
     );
 };
