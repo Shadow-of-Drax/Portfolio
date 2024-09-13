@@ -14,7 +14,7 @@ app.use(express.json());
 app.use('/api', postRoutes);
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/blog', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/blog')
     .then(() => {
         console.log('MongoDB connected');
         app.listen(PORT, () => {
