@@ -6,17 +6,9 @@ class AI {
         this.lastHit = null;
         this.possibleTargets = [];
     }
-    
-    // Utility function to shuffle an array
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
+}
 
-    generateAllPossibleMoves() {
+    generateAllPossibleMoves(); {
         const moves = [];
         for (let x = 0; x < this.board.size; x++) {
             for (let y = 0; y < this.board.size; y++) {
@@ -26,7 +18,7 @@ class AI {
         return shuffleArray(moves);
     }
 
-    makeMove(opponentBoard) {
+    makeMove(opponentBoard); {
         let move;
         if (this.huntMode && this.possibleTargets.length > 0) {
             move = this.possibleTargets.pop();
@@ -47,23 +39,31 @@ class AI {
         UI.updateCell('player-board', move.x, move.y, result);
     }
 
-    addAdjacentTargets(move, opponentBoard) {
+    addAdjacentTargets(move, opponentBoard);  {
         const { x, y } = move;
         const adjacentMoves = [
             { x: x + 1, y }, { x: x - 1, y },
-            { x, y + 1 }, { x, y - 1 }
+            { x, y: y + 1 }, { x, y: y - 1 }
         ];
-
-        adjacentMoves.forEach(m => {
+    
+        adjacentMoves.forEach(adjacentCell => {
+            const { x: adjX, y: adjY } = adjacentCell;
             if (
-                m.x >= 0 && m.x < opponentBoard.size &&
-                m.y >= 0 && m.y < opponentBoard.size &&
-                opponentBoard.grid[m.y][m.x] !== 'miss' &&
-                opponentBoard.grid[m.y][m.x] !== 'hit' &&
-                !this.possibleTargets.some(t => t.x === m.x && t.y === m.y)
+                adjX >= 0 && adjX < opponentBoard.size &&
+                adjY >= 0 && adjY < opponentBoard.size &&
+                !opponentBoard.grid[adjY][adjX].isHit &&
+                !this.possibleTargets.some(t => t.x === adjX && t.y === adjY)
             ) {
-                this.possibleTargets.push(m);
+                this.possibleTargets.push({ x: adjX, y: adjY });
             }
         });
     }
+
+// Utility function to shuffle an array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
