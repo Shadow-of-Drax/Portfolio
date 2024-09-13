@@ -1,10 +1,13 @@
+class Game {
+    constructor() {
+
 const game = new Game(); {
     window.game = game;
     player: null,
     aiPlayer; null,
     ai; null,
-    leaderboard; [],
-
+    leaderboard; [];
+}
     init(); {
         this.player = new Player('Player');
         this.aiPlayer = new Player('AI');
@@ -21,8 +24,8 @@ const game = new Game(); {
 
         UI.updateLeaderboard(this.leaderboard);
     };
-
-    saveGame(); {
+    }
+    saveGame() {
         const gameState = {
             playerBoard: this.serializeBoard(this.player.board),
             aiBoard: this.serializeBoard(this.aiPlayer.board),
@@ -32,7 +35,7 @@ const game = new Game(); {
         alert('Game saved!');
     };
 
-    loadGame(); {
+    loadGame() {
         const gameState = Storage.loadGame();
         if (gameState) {
             this.deserializeBoard(this.player.board, gameState.playerBoard);
@@ -45,7 +48,7 @@ const game = new Game(); {
         }
     };
 
-    serializeBoard(board); {
+    serializeBoard(board) {
         return {
             size: board.size,
             grid: board.grid.map(row => row.map(cell => {
@@ -58,7 +61,7 @@ const game = new Game(); {
         };
     };
 
-    deserializeBoard(board, data); {
+    deserializeBoard(board, data) {
         board.size = data.size;
         board.grid = data.grid.map(row => row.map(cell => {
             if (cell && typeof cell === 'object' && 'length' in cell) {
