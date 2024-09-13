@@ -1,50 +1,48 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./Auth.css";
 
 const Register = () => {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleRegister = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/register", {
+      await axios.post("http://localhost:5000/register", {
         username,
-        email,
         password,
+        avatarUrl,
       });
-      alert("Registration successful");
+      alert("Registered successfully!");
     } catch (error) {
-      console.error("Registration error", error);
+      console.error("Error registering:", error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="auth-container">
+      <h2>Register</h2>
       <input
         type="text"
+        placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
-        required
-      />
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        required
       />
       <input
         type="password"
+        placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        required
       />
-      <button type="submit">Register</button>
-    </form>
+      <input
+        type="text"
+        placeholder="Avatar URL"
+        value={avatarUrl}
+        onChange={(e) => setAvatarUrl(e.target.value)}
+      />
+      <button onClick={handleRegister}>Register</button>
+    </div>
   );
 };
 

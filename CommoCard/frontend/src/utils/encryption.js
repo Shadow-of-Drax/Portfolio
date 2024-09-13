@@ -1,21 +1,21 @@
 import * as openpgp from "openpgp";
 
-export const encryptMessage = async (message, publicKey) => {
-  const publicKeyObj = await openpgp.readKey({ armoredKey: publicKey });
+export async function encryptMessage(message, publicKeyArmored) {
+  const publicKey = await openpgp.readKey({ armoredKey: publicKeyArmored });
   const encryptedMessage = await openpgp.encrypt({
     message: await openpgp.createMessage({ text: message }),
-    encryptionKeys: publicKeyObj,
+    encryptionKeys: publicKey,
   });
   return encryptedMessage;
-};
+}
 
-export const decryptMessage = async (
+export async function decryptMessage(
   encryptedMessage,
-  privateKey,
+  privateKeyArmored,
   passphrase
-) => {
-  const privateKeyObj = await openpgp.decryptKey({
-    privateKey: await openpgp.readPrivateKey({ armoredKey: privateKey }),
+) {
+  const privateKey = await openpgp.decryptKey({
+    privateKey: await openpgp.readPrivateKey({ armoredKey: privateKeyArmored }),
     passphrase,
   });
   const message = await openpgp.readMessage({
@@ -23,7 +23,7 @@ export const decryptMessage = async (
   });
   const { data: decryptedMessage } = await openpgp.decrypt({
     message,
-    decryptionKeys: privateKeyObj,
+    decryptionKeys: privateKey,
   });
   return decryptedMessage;
-};
+}
