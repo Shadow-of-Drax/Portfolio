@@ -54,4 +54,10 @@ const UI = {
             leaderboardElement.appendChild(li);
         });
     }
-};
+    };
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('btn-new-game').addEventListener('click', () => {
+            game.init();
+        });
+    });
