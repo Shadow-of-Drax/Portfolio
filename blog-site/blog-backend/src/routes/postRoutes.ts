@@ -1,10 +1,13 @@
 import { Router } from 'express';
-import { createPost, getPosts, deletePost } from '../controllers/postController';
+import { createPost, getPosts, deletePost, updatePost } from '../controllers/postController';
+import { verifyToken } from '../controllers/authController';
 
 const router = Router();
 
-router.post('/posts', createPost);
+router.post('/posts', verifyToken, createPost);
 router.get('/posts', getPosts);
-router.delete('/posts/:id', deletePost);
+router.put('/posts/:id', verifyToken, updatePost);
+router.delete('/posts/:id', verifyToken, deletePost);
+router.post('/posts/:id/comments', verifyToken, addComment);
 
 export default router;
