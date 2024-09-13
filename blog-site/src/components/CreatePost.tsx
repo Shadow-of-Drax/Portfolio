@@ -26,7 +26,18 @@ const handleSubmit = async (e: React.FormEvent) => {
   } catch (error) {
     console.error('Error creating post', error);
   }
+}
+
+return (
+  <form onSubmit={handleSubmit}>
+    <h2>Create a New Post</h2>
+    <input type="text" required placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+    <textarea required placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)} />
+    <button type="submit">Create Post</button>
+  </form>
+);
 };
+
 const Register: React.FC = () => {
   return (
     <Formik
@@ -46,17 +57,6 @@ const Register: React.FC = () => {
       )}
     </Formik>
   );
-};
-
-return (
-  <form onSubmit={handleSubmit}>
-    <h2>Create a New Post</h2>
-    <input type="text" required placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-    <textarea required placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)} />
-    <button type="submit">Create Post</button>
-  </form>
-);
-};);
 };
 
 export default CreatePost;

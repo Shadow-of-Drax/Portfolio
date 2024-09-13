@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Register: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,7 +12,7 @@ const Register: React.FC = () => {
     e.preventDefault();
     try {
       await axios.post('http://localhost:5000/api/register', { username, email, password });
-      history.push('/login');
+      navigate('/login');
     } catch (error) {
       console.error('Error registering', error);
     }

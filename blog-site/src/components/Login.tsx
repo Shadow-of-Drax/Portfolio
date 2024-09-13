@@ -1,21 +1,21 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../contexts/AuthContext';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const { login } = useContext(AuthContext);
-  const history = useHistory();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/login', { email, password });
+      const response = await axios.post<{ token: string; userId: string; username: string }>('http://localhost:5000/api/login', { email, password });
       const { token, userId, username } = response.data;
       login(token, userId, username);
-      history.push('/');
+      navigate('/');
     } catch (error) {
       console.error('Error logging in', error);
     }

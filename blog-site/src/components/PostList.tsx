@@ -2,12 +2,18 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../contexts/AuthContext';
 
+interface Comment {
+  content: string;
+  author: string;
+}
+
 interface Post {
   _id: string;
   title: string;
   content: string;
   author: string;
   date: string;
+  comments: Comment[];
 }
 
 const PostList: React.FC = () => {
@@ -18,30 +24,15 @@ const PostList: React.FC = () => {
   const [editedContent, setEditedContent] = useState('');
 
   const [currentPage, setCurrentPage] = useState(1);
-const [totalPages, setTotalPages] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-const fetchPosts = async () => {
-  const response = await axios.get(`http://localhost:5000/api/posts?page=${currentPage}`);
-  setPosts(response.data.posts);
-  setTotalPages(response.data.totalPages);
-};
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
 
-const handlePageChange = (newPage: number) => {
-  setCurrentPage(newPage);
-};
-
-useEffect(() => {
-  fetchPosts();
-}, [currentPage]);
-
-// Pagination controls
-<div>
-  {Array.from({ length: totalPages }, (_, idx) => (
-    <button key={idx} onClick={() => handlePageChange(idx + 1)}>
-      {idx + 1}
-    </button>
-  ))}
-</div>
+  useEffect(() => {
+    fetchPosts();
+  }, [currentPage]);
 
   useEffect(() => {
     fetchPosts();
@@ -49,7 +40,7 @@ useEffect(() => {
 
   const fetchPosts = async () => {
     const response = await axios.get('http://localhost:5000/api/posts');
-    setPosts(response.data);
+    setPosts(response.data as Post[]);
   };
 
   const deletePost = async (postId: string) => {
@@ -63,12 +54,6 @@ useEffect(() => {
     }
   };
 
-  const startEditing = (post: Post) => {
-    setEditingPostId(post._id);
-    setEditedTitle(post.title);
-    setEditedContent(post.content);
-  };
-
   const saveEdits = async (postId: string) => {
     try {
       await axios.put(`http://localhost:5000/api/posts/${postId}`, { title: editedTitle, content: editedContent }, {
@@ -79,25 +64,40 @@ useEffect(() => {
     } catch (error) {
       console.error('Error updating post', error);
     }
+  };
 
-const [newComment, setNewComment] = useState('');
+  const [newComment, setNewComment] = useState('');
 
-const handleAddComment = async (e: React.FormEvent, postId: string) => {
-  e.preventDefault();
-  try {
-    await axios.post(`http://localhost:5000/api/posts/${postId}/comments`, { content: newComment }, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setNewComment('');
-    fetchPosts();
-  } catch (error) {
-    console.error('Error adding comment', error);
-  }
-};
+  const handleAddComment = async (e: React.FormEvent, postId: string) => {
+    e.preventDefault();
+    try {
+      await axios.post(`http://localhost:5000/api/posts/${postId}/comments`, { content: newComment }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setNewComment('');
+      fetchPosts();
+    } catch (error) {
+      console.error('Error adding comment', error);
+    }
+  };
+
+  const startEditing = (post: Post) => {
+    setEditingPostId(post._id);
+    setEditedTitle(post.title);
+    setEditedContent(post.content);
   };
 
   return (
     <div>
+      {/* Pagination controls */}
+      <div>
+        {Array.from({ length: totalPages }, (_, idx) => (
+          <button key={idx} onClick={() => handlePageChange(idx + 1)}>
+            {idx + 1}
+          </button>
+        ))}
+      </div>
+
       {posts.map((post) => (
         <div key={post._id}>
           {editingPostId === post._id ? (
@@ -119,34 +119,33 @@ const handleAddComment = async (e: React.FormEvent, postId: string) => {
                   <button onClick={() => deletePost(post._id)}>Delete</button>
                 </div>
               )}
-            </div>
-            <div>
-            {/* Existing post details */}
-            <h3>Comments:</h3>
-            {post.comments.map((comment, idx) => (
-              <div key={idx}>
-                <p>{comment.content}</p>
-                <p>By: {comment.author}</p>
+              <div>
+                {/* Existing post details */}
+                <h3>Comments:</h3>
+                {post.comments.map((comment: Comment, idx: number) => (
+                  <div key={idx}>
+                    <p>{comment.content}</p>
+                    <p>By: {comment.author}</p>
+                  </div>
+                ))}
+
+                {token && (
+                  <form onSubmit={(e) => handleAddComment(e, post._id)}>
+                    <textarea
+                      required
+                      placeholder="Add a comment"
+                      value={newComment}
+                      onChange={(e) => setNewComment(e.target.value)}
+                    />
+                    <button type="submit">Submit</button>
+                  </form>
+                )}
               </div>
-            ))}
-          
-            {token && (
-              <form onSubmit={(e) => handleAddComment(e, post._id)}>
-                <textarea
-                  required
-                  placeholder="Add a comment"
-                  value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
-                />
-                <button type="submit">Submit</button>
-              </form>
-            )}
-          </div>
+            </div>
           )}
         </div>
       ))}
     </div>
-    <div dangerouslySetInnerHTML={{ __html: post.content }} />
   );
 };
 
