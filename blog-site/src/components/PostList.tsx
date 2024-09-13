@@ -15,7 +15,7 @@ const PostList: React.FC = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             const response = await axios.get('http://localhost:5000/api/posts');
-            setPosts(response.data);
+            setPosts(response.data as Post[]);
         };
         fetchPosts();
     }, []);
