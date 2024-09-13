@@ -1,0 +1,69 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+#game-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+    gap: 2px;
+}
+
+.cell {
+    width: 30px;
+    height: 30px;
+    background-color: #3498db;
+    border: 1px solid #2980b9;
+    cursor: pointer;
+}
+
+.cell.hit {
+    background-color: #e74c3c;
+    background-image: url('../assets/images/explosion.png');
+    background-size: cover;
+    animation: explode 0.5s ease-out;
+}
+
+.cell.miss {
+    background-color: #95a5a6;
+}
+
+@keyframes explode {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); opacity: 0; }
+}
+
+#controls {
+    text-align: center;
+    margin: 20px;
+}
+
+#controls button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+}
+
+#leaderboard {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#leaderboard-list {
+    list-style: none;
+    padding: 0;
+}
+
+#leaderboard-list li {
+    margin: 5px 0;
+}
