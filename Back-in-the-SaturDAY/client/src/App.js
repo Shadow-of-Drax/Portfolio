@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import VideoPlayer from './components/VideoPlayer';
+import './styles/App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const videoSrc = 'path_to_your_video.mp4'; // Update with your video path
+
+    return (
+        <div className="app">
+            <h1>Back in the SaturDAY!</h1>
+            <VideoPlayer videoSrc={videoSrc} />
+        </div>
+    );
+};
 
 export default App;
