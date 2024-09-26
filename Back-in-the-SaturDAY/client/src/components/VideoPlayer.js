@@ -1,12 +1,17 @@
 import React from 'react';
 
-const VideoPlayer = ({ videoSrc }) => {
+const VideoPlayer = ({ videoUrl }) => {
     return (
         <div className="video-player">
-            <video controls>
-                <source src={videoSrc} type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
+            <iframe
+                width="100%"
+                height="500"
+                src={videoUrl.replace("watch?v=", "embed/")} // Convert YouTube URL
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+            ></iframe>
         </div>
     );
 };
