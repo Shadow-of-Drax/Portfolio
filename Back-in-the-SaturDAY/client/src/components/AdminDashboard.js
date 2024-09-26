@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import EmailNotification from './EmailNotification'; // Import the EmailNotification component
+
 
 const AdminDashboard = () => {
     const [users, setUsers] = useState([]);
@@ -114,6 +116,12 @@ const AdminDashboard = () => {
             </ul>
         </div>
     );
-};
+        <div>
+        <h2>Admin Dashboard</h2>
+        <EmailNotification /> {/* Include the EmailNotification component */}
+        <h3>Manage Movies</h3>
+        {/* Existing movie management code... */}
+    </div>
+    };
 
 export default AdminDashboard;
