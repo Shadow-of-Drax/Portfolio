@@ -33,6 +33,12 @@ router.post('/login', async (req, res) => {
     }
 });
 
+const roleMiddleware = require('./middleware/roleMiddleware');
+
+// Protect a route for admin only
+router.get('/admin', roleMiddleware(['admin']), (req, res) => {
+    res.send('Admin area');
+});
 // Middleware for error handling
 router.use((err, req, res, next) => {
     console.error(err.stack);
