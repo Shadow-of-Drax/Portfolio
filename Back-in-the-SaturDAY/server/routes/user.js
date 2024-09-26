@@ -1,48 +1,49 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const User = require('../models/User'); // Import User model
 const router = express.Router();
 
-const users = []; // For demonstration purposes, this should be replaced with a database
-                  // Change to an array of user objects with roles and permissions
-
+// User registration
 router.post('/register', async (req, res) => {
-    const { username, password, role } = req.body; // Include role in request
-        try {
-            const hashedPassword = await bcrypt.hash(password, 10);
-                users.push({ username, password: hashedPassword, role }); // Store role with user
-                res.status(201).send('User registered');
-                    } catch (error) {
-                        res.status(500).send('Error registering user');
-                    }
-                });
+    const { username, password, role } = req.body;
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = new User({ username, password: hashedPassword, role });
+        await newUser.save();
+        res.status(201).send('User registered');
+    } catch (error) {
+        res.status(500).send('Error registering user');
+    }
+});
 
+// User login
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    const user = users.find(u => u.username === username);
-    if (!user) return res.status(400).send('User not found');
-
     try {
+        const user = await User.findOne({ username });
+        if (!user) return res.status(400).send('User not found');
+
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).send('Invalid credentials');
 
-        const token = jwt.sign({ username, role: user.role }, 'secretkey'); // Use a secure key in production
+        const token = jwt.sign({ username: user.username, role: user.role }, process.env.JWT_SECRET);
         res.json({ token });
     } catch (error) {
         res.status(500).send('Error logging in');
     }
 });
 
-const roleMiddleware = require('./middleware/roleMiddleware');
-
-// Protect a route for admin only
-router.get('/admin', roleMiddleware(['admin']), (req, res) => {
-    res.send('Admin area');
-});
-// Middleware for error handling
-router.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+// Password reset
+router.post('/reset-password', async (req, res) => {
+    const { username, newPassword } = req.body;
+    try {
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        await User.updateOne({ username }, { password: hashedPassword });
+        res.send('Password updated successfully');
+    } catch (error) {
+        res.status(500).send('Error resetting password');
+    }
 });
 
 module.exports = router;

@@ -6,6 +6,9 @@ import VideoPlayer from './components/VideoPlayer';
 import Auth from './components/Auth';
 import './styles/App.css';
 import jwt_decode from 'jwt-decode';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import PasswordReset from './components/PasswordReset'; // Import the PasswordReset component
+
 
 const App = () => {
     const [selectedMovie, setSelectedMovie] = useState(null);
@@ -49,6 +52,9 @@ const App = () => {
                 <Switch>
                     <Route path="/login">
                         {!user ? <Auth onLogin={handleLogin} /> : <MovieList movies={movies} onMovieClick={handleMovieClick} />}
+                    </Route>
+                    <Route path="/reset-password">
+                        <PasswordReset />
                     </Route>
                     <Route path="/movies">
                         {user ? <MovieList movies={movies} onMovieClick={handleMovieClick} /> : <Auth onLogin={handleLogin} />}
