@@ -5,15 +5,19 @@ import MovieList from './components/MovieList';
 import VideoPlayer from './components/VideoPlayer';
 import Auth from './components/Auth';
 import './styles/App.css';
+import jwt_decode from 'jwt-decode';
 
 const App = () => {
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [user, setUser] = useState(null);
+    const [role, setRole] = useState(null); // Add role state
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setUser(storedUser);
+        const storedToken = localStorage.getItem('token');
+        if (storedToken) {
+            const decoded = jwt_decode(storedToken);
+            setUser(decoded.username);
+            setRole(decoded.role); // Set the user role
         }
     }, []);
 
@@ -41,7 +45,7 @@ const App = () => {
     return (
         <Router>
             <div className="app">
-                <Navbar user={user} onLogout={handleLogout} />
+                <Navbar user={user} role={role} onLogout={handleLogout} />
                 <Switch>
                     <Route path="/login">
                         {!user ? <Auth onLogin={handleLogin} /> : <MovieList movies={movies} onMovieClick={handleMovieClick} />}
@@ -49,9 +53,12 @@ const App = () => {
                     <Route path="/movies">
                         {user ? <MovieList movies={movies} onMovieClick={handleMovieClick} /> : <Auth onLogin={handleLogin} />}
                     </Route>
-                    <Route path="/video">
-                        {selectedMovie ? <VideoPlayer videoSrc={selectedMovie.video} /> : <MovieList movies={movies} onMovieClick={handleMovieClick} />}
-                    </Route>
+                    {/* Protected Admin Route */}
+                    {role === 'admin' && (
+                        <Route path="/admin">
+                            <AdminComponent />
+                        </Route>
+                    )}
                     <Route path="/" exact>
                         <h2>Welcome to Back in the SaturDAY!</h2>
                     </Route>
