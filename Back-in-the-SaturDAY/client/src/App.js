@@ -53,10 +53,12 @@ const App = () => {
             <div className="app">
                 <Navbar user={user} role={role} onLogout={handleLogout} />
                 <Routes>
-                    <Route path="/admin" element={role === 'admin' ? <AdminDashboard /> : <h2>Access Denied</h2>} />
-                    <Route path="/movies" element={<MovieList />} /> {/* Render MovieList here */}
-                    {/* Other routes */}
-
+                     <Route path="/login" element={!user ? <Auth onLogin={setUser} /> : <Navigate to="/" />} />
+                     <Route path="/reset-password" element={<PasswordReset />} />
+                     <Route path="/admin" element={role === 'admin' ? <AdminDashboard /> : <h2>Access Denied</h2>} />
+                     <Route path="/movies" element={<MovieList />} /> {/* Ensure this is correct */}
+                     <Route path="/" element={<h2>Home</h2>} /> {/* Home route */}
+                     <Route path="*" element={<h2>404 Not Found</h2>} /> {/* Catch-all for undefined routes */}
                 </Routes>
             </div>
         </Router>

@@ -20,13 +20,17 @@ const MovieList = () => {
 
     return (
         <div className="movie-list">
-            {movies.map(movie => (
-                <div key={movie._id} className="movie-item">
-                    <img src={movie.poster} alt={movie.title} />
-                    <h3>{movie.title}</h3>
-                    <a href={movie.videoUrl} target="_blank" rel="noopener noreferrer">Watch</a>
-                </div>
-            ))}
+            {movies.length === 0 ? (
+                <p>No movies available.</p>
+            ) : (
+                movies.map(movie => (
+                    <div key={movie._id} className="movie-item">
+                        <img src={movie.poster} alt={movie.title} />
+                        <h3>{movie.title}</h3>
+                        <a href={movie.videoUrl} target="_blank" rel="noopener noreferrer">Watch</a>
+                    </div>
+                ))
+            )}
         </div>
     );
 };
