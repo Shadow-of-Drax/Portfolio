@@ -8,6 +8,8 @@ import './styles/App.css';
 import jwt_decode from 'jwt-decode';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PasswordReset from './components/PasswordReset'; // Import the PasswordReset component
+import AdminDashboard from './components/AdminDashboard'; // Import the AdminDashboard component
+
 
 
 const App = () => {
@@ -50,24 +52,10 @@ const App = () => {
             <div className="app">
                 <Navbar user={user} role={role} onLogout={handleLogout} />
                 <Switch>
-                    <Route path="/login">
-                        {!user ? <Auth onLogin={handleLogin} /> : <MovieList movies={movies} onMovieClick={handleMovieClick} />}
+                    <Route path="/admin">
+                        {role === 'admin' ? <AdminDashboard /> : <h2>Access Denied</h2>}
                     </Route>
-                    <Route path="/reset-password">
-                        <PasswordReset />
-                    </Route>
-                    <Route path="/movies">
-                        {user ? <MovieList movies={movies} onMovieClick={handleMovieClick} /> : <Auth onLogin={handleLogin} />}
-                    </Route>
-                    {/* Protected Admin Route */}
-                    {role === 'admin' && (
-                        <Route path="/admin">
-                            <AdminComponent />
-                        </Route>
-                    )}
-                    <Route path="/" exact>
-                        <h2>Welcome to Back in the SaturDAY!</h2>
-                    </Route>
+                    {/* Other routes */}
                 </Switch>
             </div>
         </Router>
