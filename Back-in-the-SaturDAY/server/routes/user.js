@@ -46,4 +46,20 @@ router.post('/reset-password', async (req, res) => {
     }
 });
 
+const { sendPasswordResetEmail } = require('../mail'); // Import the mail function
+
+router.post('/request-reset', async (req, res) => {
+    const { username } = req.body;
+    try {
+        const user = await User.findOne({ username });
+        if (!user) return res.status(400).send('User not found');
+
+        const resetToken = jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        await sendPasswordResetEmail(user.email, resetToken); // Ensure you have an email field in your User model
+        res.send('Password reset email sent');
+    } catch (error) {
+        res.status(500).send('Error sending password reset email');
+    }
+});
+
 module.exports = router;
