@@ -17,10 +17,11 @@ router.post('/', async (req, res) => {
 // Get all movies
 router.get('/', async (req, res) => {
     try {
-        const movies = await Movie.find();
-        res.json(movies);
+        const movies = await Movie.find(); // Fetch movies from the database
+        res.json(movies); // Send movies as a JSON response
     } catch (error) {
-        res.status(500).send('Error fetching movies');
+        console.error('Error fetching movies:', error); // Log the error to the console
+        res.status(500).send('Error fetching movies'); // Send a 500 response in case of an error
     }
 });
 
