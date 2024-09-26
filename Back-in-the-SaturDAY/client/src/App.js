@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import MovieList from './components/MovieList';
-import VideoPlayer from './components/VideoPlayer';
+//import VideoPlayer from './components/VideoPlayer';
 import Auth from './components/Auth';
 import './styles/App.css';
 import { jwtDecode } from 'jwt-decode';
