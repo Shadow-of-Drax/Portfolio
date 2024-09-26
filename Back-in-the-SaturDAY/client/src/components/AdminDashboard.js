@@ -8,7 +8,7 @@ const AdminDashboard = () => {
     const [movies, setMovies] = useState([]);
     const [title, setTitle] = useState('');
     const [poster, setPoster] = useState('');
-    const [video, setVideo] = useState('');
+    const [videoUrl, setVideo] = useState('');
     const [editing, setEditing] = useState(null); // Track if editing a movie
 
     useEffect(() => {
@@ -32,7 +32,7 @@ const AdminDashboard = () => {
             setMovies([...movies, { title, poster, video }]);
             setTitle('');
             setPoster('');
-            setVideo('');
+            setVideoUrl(''); // Reset videoUrl
         } catch (error) {
             console.error('Error adding movie:', error);
         }
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
                 setEditing(null);
                 setTitle('');
                 setPoster('');
-                setVideo('');
+                setVideoUrl(''); // Reset videoUrl
             } catch (error) {
                 console.error('Error updating movie:', error);
             }
@@ -57,7 +57,7 @@ const AdminDashboard = () => {
             const movieToEdit = movies.find(movie => movie._id === id);
             setTitle(movieToEdit.title);
             setPoster(movieToEdit.poster);
-            setVideo(movieToEdit.video);
+            setVideoUrl(movieToEdit.video);
             setEditing(id);
         }
     };
@@ -91,9 +91,9 @@ const AdminDashboard = () => {
             />
             <input
                 type="text"
-                placeholder="Video URL"
-                value={video}
-                onChange={(e) => setVideo(e.target.value)}
+                placeholder="YouTube Video URL"
+                value={videoUrl}
+                onChange={(e) => setVideoUrl(e.target.value)}
             />
             <button onClick={() => (editing ? handleEditMovie(editing) : handleAddMovie())}>
                 {editing ? 'Update Movie' : 'Add Movie'}
