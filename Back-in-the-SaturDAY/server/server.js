@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
-const uri = "mongodb+srv://jamesrwarren83:<L?zfS2q/wfFqZGN>@james-warren-database.29bff.mongodb.net/?retryWrites=true&w=majority&appName=James-Warren-Database"; // Make sure to set your actual password
+const uri = "mongodb+srv://jamesrwarren83:SQ9qZ71HR8xy1XtS@james-warren-database.29bff.mongodb.net/?retryWrites=true&w=majority&appName=James-Warren-Database"; // Make sure to set your actual password
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,

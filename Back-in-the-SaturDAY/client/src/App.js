@@ -25,6 +25,8 @@ const App = () => {
         }
     }, []);
 
+
+
     const movies = [
         { title: 'Movie 1', poster: 'path_to_poster1.jpg', video: 'path_to_video1.mp4' },
         { title: 'Movie 2', poster: 'path_to_poster2.jpg', video: 'path_to_video2.mp4' },
@@ -52,7 +54,9 @@ const App = () => {
                 <Navbar user={user} role={role} onLogout={handleLogout} />
                 <Routes>
                     <Route path="/admin" element={role === 'admin' ? <AdminDashboard /> : <h2>Access Denied</h2>} />
+                    <Route path="/movies" element={<MovieList />} /> {/* Render MovieList here */}
                     {/* Other routes */}
+
                 </Routes>
             </div>
         </Router>
