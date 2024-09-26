@@ -1,14 +1,14 @@
 import React from 'react';
-import '../styles/Navbar.css';
+import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ user, onLogout }) => {
     return (
         <nav className="navbar">
             <h1>Back in the SaturDAY!</h1>
             <div className="navbar-links">
                 <a href="#home">Home</a>
                 <a href="#movies">Movies</a>
-                <a href="#series">Series</a>
+                {user && <button onClick={onLogout}>Logout</button>}
             </div>
         </nav>
     );
