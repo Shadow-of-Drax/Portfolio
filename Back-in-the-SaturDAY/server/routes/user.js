@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User'); // Import User model
 const router = express.Router();
+const rateLimit = require('express-rate-limit');
 
 // User registration
 router.post('/register', async (req, res) => {
@@ -32,6 +33,16 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         res.status(500).send('Error logging in');
     }
+});
+
+// Rate limit for password reset requests
+const resetLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // Limit each IP to 5 requests per windowMs
+    message: 'Too many requests, please try again later.',
+});
+
+router.post('/request-reset', resetLimiter, async (req, res) => {
 });
 
 // Password reset
