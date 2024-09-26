@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import MovieList from './components/MovieList';
 import VideoPlayer from './components/VideoPlayer';
@@ -7,9 +8,8 @@ import './styles/App.css';
 
 const App = () => {
     const [selectedMovie, setSelectedMovie] = useState(null);
-    const [user, setUser] = useState(null); // Manage user state
+    const [user, setUser] = useState(null);
 
-    // Load user from localStorage on app initialization
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
@@ -30,28 +30,34 @@ const App = () => {
 
     const handleLogin = (username) => {
         setUser(username);
-        localStorage.setItem('user', username); // Store user in localStorage
+        localStorage.setItem('user', username);
     };
 
     const handleLogout = () => {
         setUser(null);
-        localStorage.removeItem('user'); // Remove user from localStorage
+        localStorage.removeItem('user');
     };
 
     return (
-        <div className="app">
-            <Navbar user={user} onLogout={handleLogout} />
-            {!user ? (
-                <Auth onLogin={handleLogin} />
-            ) : selectedMovie ? (
-                <VideoPlayer videoSrc={selectedMovie.video} />
-            ) : (
-                <>
-                    <h2>Featured Movies</h2>
-                    <MovieList movies={movies} onMovieClick={handleMovieClick} />
-                </>
-            )}
-        </div>
+        <Router>
+            <div className="app">
+                <Navbar user={user} onLogout={handleLogout} />
+                <Switch>
+                    <Route path="/login">
+                        {!user ? <Auth onLogin={handleLogin} /> : <MovieList movies={movies} onMovieClick={handleMovieClick} />}
+                    </Route>
+                    <Route path="/movies">
+                        {user ? <MovieList movies={movies} onMovieClick={handleMovieClick} /> : <Auth onLogin={handleLogin} />}
+                    </Route>
+                    <Route path="/video">
+                        {selectedMovie ? <VideoPlayer videoSrc={selectedMovie.video} /> : <MovieList movies={movies} onMovieClick={handleMovieClick} />}
+                    </Route>
+                    <Route path="/" exact>
+                        <h2>Welcome to Back in the SaturDAY!</h2>
+                    </Route>
+                </Switch>
+            </div>
+        </Router>
     );
 };
 
