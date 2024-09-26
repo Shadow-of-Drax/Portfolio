@@ -51,9 +51,7 @@ const App = () => {
             <div className="app">
                 <Navbar user={user} role={role} onLogout={handleLogout} />
                 <Routes>
-                    <Route path="/admin">
-                        {role === 'admin' ? <AdminDashboard /> : <h2>Access Denied</h2>}
-                    </Route>
+                    <Route path="/admin" element={role === 'admin' ? <AdminDashboard /> : <h2>Access Denied</h2>} />
                     {/* Other routes */}
                 </Routes>
             </div>
