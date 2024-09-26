@@ -8,7 +8,7 @@ const AdminDashboard = () => {
     const [movies, setMovies] = useState([]);
     const [title, setTitle] = useState('');
     const [poster, setPoster] = useState('');
-    const [videoUrl, setVideo] = useState('');
+    const [videoUrl, setVideoUrl] = useState('');
     const [editing, setEditing] = useState(null); // Track if editing a movie
 
     useEffect(() => {
@@ -28,8 +28,8 @@ const AdminDashboard = () => {
 
     const handleAddMovie = async () => {
         try {
-            await axios.post('http://localhost:5000/api/movies', { title, poster, video });
-            setMovies([...movies, { title, poster, video }]);
+            await axios.post('http://localhost:5000/api/movies', { title, poster, videoUrl });
+            setMovies([...movies, { title, poster, videoUrl }]);
             setTitle('');
             setPoster('');
             setVideoUrl('');
@@ -41,9 +41,9 @@ const AdminDashboard = () => {
     const handleEditMovie = async (id) => {
         if (editing) {
             try {
-                await axios.put(`http://localhost:5000/api/movies/${id}`, { title, poster, video });
+                await axios.put(`http://localhost:5000/api/movies/${id}`, { title, poster, videoUrl });
                 const updatedMovies = movies.map(movie => 
-                    movie._id === id ? { ...movie, title, poster, video } : movie
+                    movie._id === id ? { ...movie, title, poster, videoUrl } : movie
                 );
                 setMovies(updatedMovies);
                 setEditing(null);

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import MovieList from './components/MovieList';
 import VideoPlayer from './components/VideoPlayer';
 import Auth from './components/Auth';
 import './styles/App.css';
-import jwt_decode from 'jwt-decode';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import PasswordReset from './components/PasswordReset'; // Import the PasswordReset component
 import AdminDashboard from './components/AdminDashboard'; // Import the AdminDashboard component
 
@@ -20,7 +19,7 @@ const App = () => {
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
         if (storedToken) {
-            const decoded = jwt_decode(storedToken);
+            const decoded = jwtDecode(storedToken);
             setUser(decoded.username);
             setRole(decoded.role); // Set the user role
         }
@@ -51,12 +50,12 @@ const App = () => {
         <Router>
             <div className="app">
                 <Navbar user={user} role={role} onLogout={handleLogout} />
-                <Switch>
+                <Routes>
                     <Route path="/admin">
                         {role === 'admin' ? <AdminDashboard /> : <h2>Access Denied</h2>}
                     </Route>
                     {/* Other routes */}
-                </Switch>
+                </Routes>
             </div>
         </Router>
     );

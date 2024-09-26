@@ -1,5 +1,5 @@
 import React from 'react';
-import './MovieList.css';
+import '../styles/MovieList.css';
 
 const MovieList = ({ movies, onMovieClick }) => {
     return (
