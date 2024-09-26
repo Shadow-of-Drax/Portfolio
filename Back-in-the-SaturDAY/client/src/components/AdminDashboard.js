@@ -32,7 +32,7 @@ const AdminDashboard = () => {
             setMovies([...movies, { title, poster, video }]);
             setTitle('');
             setPoster('');
-            setVideoUrl(''); // Reset videoUrl
+            setVideoUrl('');
         } catch (error) {
             console.error('Error adding movie:', error);
         }
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
                 setEditing(null);
                 setTitle('');
                 setPoster('');
-                setVideoUrl(''); // Reset videoUrl
+                setVideoUrl('');
             } catch (error) {
                 console.error('Error updating movie:', error);
             }
