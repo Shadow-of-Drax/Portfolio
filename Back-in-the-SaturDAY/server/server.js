@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
+const movieRoutes = require('./routes/movie'); // Import movie routes
 require('dotenv').config();
 
 const app = express();
@@ -16,6 +17,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/api', userRoutes);
+app.use('/api/movies', movieRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
