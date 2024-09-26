@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import MovieList from './components/MovieList';
 import VideoPlayer from './components/VideoPlayer';
+import Auth from './components/Auth';
 import './styles/App.css';
 
 const App = () => {
     const [selectedMovie, setSelectedMovie] = useState(null);
-    
+    const [user, setUser] = useState(null); // Manage user state
+
     const movies = [
         { title: 'Movie 1', poster: 'path_to_poster1.jpg', video: 'path_to_video1.mp4' },
         { title: 'Movie 2', poster: 'path_to_poster2.jpg', video: 'path_to_video2.mp4' },
@@ -19,10 +21,16 @@ const App = () => {
         setSelectedMovie(movie);
     };
 
+    const handleLogin = (username) => {
+        setUser(username); // Set the user on login
+    };
+
     return (
         <div className="app">
             <Navbar />
-            {selectedMovie ? (
+            {!user ? (
+                <Auth onLogin={handleLogin} />
+            ) : selectedMovie ? (
                 <VideoPlayer videoSrc={selectedMovie.video} />
             ) : (
                 <>
