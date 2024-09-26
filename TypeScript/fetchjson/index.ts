@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const url = https://jsonplaceholder.typicode.com/todos/1;
+const url = 'https://jsonplaceholder.typicode.com/todos/1';
 
-axios.get(url).then((response) => {
+axios.get(url).then(response => {
   console.log(response.data);
 });
